@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Add Item</title>
+  </head>
+  <body style="user-select: none">
+    <form>
+      <input type="text" class="item" />
+      <input type="submit" />
+    </form>
+
+    <script>
+      const { ipcRenderer } = require("electron");
+
+      const form = document.querySelector("form");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const item = document.querySelector(".item").value;
+        ipcRenderer.send("add-item", item);
+      });
+
+      ipcRenderer.on("add-item", (event, item) => {
+        console.log(item);
+      });
+    </script>
+  </body>
+</html>
