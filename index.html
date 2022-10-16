@@ -2,11 +2,20 @@
 <html>
   <head>
     <title>Shopping List</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
   </head>
-  <body style="user-select: none">
-    <h1>Shopping List</h1>
-
-    <ul></ul>
+  <body class="bg-light user-select-none">
+    <center>
+      <div class="container">
+        <h1 class="mt-5"><i>"SHOPPING LIST"</i></h1>
+        <ul class="list-group"></ul>
+      </div>
+    </center>
 
     <script>
       const { ipcRenderer } = require("electron");
@@ -14,8 +23,16 @@
       const ul = document.querySelector("ul");
 
       ipcRenderer.on("add-item", (event, item) => {
+        let r = Math.floor(Math.random() * 255) + 1;
+        let g = Math.floor(Math.random() * 255) + 1;
+        let b = Math.floor(Math.random() * 255) + 1;
+
         const li = document.createElement("li");
+        li.classList.add("list-group-item");
+        li.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        li.style.color = "black";
         li.innerText = item;
+
         ul.appendChild(li);
       });
 
@@ -24,7 +41,7 @@
       });
 
       ul.addEventListener("dblclick", (e) => {
-        e.target.remove();
+        e.target.innerHTML = `<del>${e.target.innerHTML}</del>`;
       });
     </script>
   </body>

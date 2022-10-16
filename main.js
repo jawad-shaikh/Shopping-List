@@ -20,7 +20,7 @@ const createMainWindow = () => {
 const createAddItemWindow = () => {
   addWindow = new BrowserWindow({
     width: 400,
-    height: 300,
+    height: 250,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -45,13 +45,14 @@ const mainMenuTemplate = [
     submenu: [
       {
         label: "add Item",
+        accelerator: "Ctrl+I",
         click() {
           createAddItemWindow();
         },
       },
       {
         label: "clear all",
-        accelerator: "Ctrl+C",
+        accelerator: "ALT+C",
         click() {
           clearAllItems();
         },
